@@ -2,66 +2,57 @@ import React from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
-import style from './style';
+import _ from './style';
 import useTheme from '../../hooks/useTheme';
 import Header from '../../components/Header';
 
 export default () => {
   const [theme] = useTheme();
+  const style = _(theme);
   return (
-    <View style={[style.container, {backgroundColor: theme.primaryBackground}]}>
+    <View style={style.container}>
       <Header theme={theme} title="Home" icon="more-vert" />
 
       <View
-        style={[
-          style.floatingContainer,
-          {backgroundColor: theme.secondaryBackground},
-        ]}>
+        style={style.floatingContainer}>
         <View style={style.floatingContainerHeader}>
-          <Text style={[style.floatingContainerTitle, {color: theme.primary}]}>
+          <Text style={style.floatingContainerTitle}>
             Featured
           </Text>
 
           <TouchableOpacity>
             <Text
-              style={[
-                style.floatingContainerSubTitle,
-                {color: theme.text.subtitle},
-              ]}>
+              style={style.floatingContainerSubTitle}>
               See All
             </Text>
           </TouchableOpacity>
         </View>
 
-        <View style={[style.floatingContainerButtons]}>
-          <Text style={[style.buttons, {backgroundColor: theme.white}]}>
+        <View style={style.floatingContainerButtons}>
+          <Text style={style.buttons}>
             Mobile
           </Text>
-          <Text style={[style.buttons, {backgroundColor: theme.white}]}>
+          <Text style={style.buttons}>
             Laptops
           </Text>
-          <Text style={[style.buttons, {backgroundColor: theme.white}]}>
+          <Text style={style.buttons}>
             Appliances
           </Text>
-          <Text style={[style.buttons, {backgroundColor: theme.white}]}>
+          <Text style={style.buttons}>
             Other
           </Text>
         </View>
       </View>
 
       <View style={style.body}>
-        <Text style={[style.errorMessage, {color: theme.text.title}]}>
+        <Text style={style.errorMessage}>
           No Items Found
         </Text>
         <TouchableOpacity>
           <View
-            style={[
-              style.buttons,
-              style.retryButton,
-              {backgroundColor: theme.accent},
-            ]}>
+            style={[style.buttons, style.retryButton]}>
             <MaterialIcons name="replay" size={24} color={theme.white} />
-            <Text style={[style.retryText, {color: theme.white}]}>Retry</Text>
+            <Text style={style.retryText}>Retry</Text>
           </View>
         </TouchableOpacity>
       </View>

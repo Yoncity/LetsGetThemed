@@ -1,16 +1,18 @@
 import React, {useState} from 'react';
 import {View, Text, TouchableOpacity, Switch} from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import style from './style';
+import _ from './style';
 
 import useTheme from '../../hooks/useTheme';
 import Header from '../../components/Header/';
 
 export default props => {
-  const [theme, _, updateTheme] = useTheme();
+  const [theme, __, updateTheme] = useTheme();
+  const style = _(theme);
   const date = new Date().getFullYear();
 
   const [themeSwitch, setThemeSwitch] = useState(theme.themeName === 'dark');
+
   const toggleThemeSwitch = status => {
     setThemeSwitch(status);
     if (status) updateTheme('dark');
@@ -18,16 +20,13 @@ export default props => {
   };
 
   return (
-    <View style={[style.container, {backgroundColor: theme.primaryBackground}]}>
+    <View style={style.container}>
       <Header title="Settings" icon="info" theme={theme} />
 
       <View style={style.settingsItems}>
         <TouchableOpacity>
           <View
-            style={[
-              style.itemContainer,
-              {borderBottomColor: theme.secondaryBackground},
-            ]}>
+            style={style.itemContainer}>
             <MaterialIcons
               style={style.itemIcon}
               name="style"
@@ -36,10 +35,10 @@ export default props => {
             />
 
             <View style={style.itemText}>
-              <Text style={[style.itemTitle, {color: theme.text.title}]}>
+              <Text style={style.itemTitle}>
                 Dark Theme
               </Text>
-              <Text style={[style.itemDetails, {color: theme.text.subtitle}]}>
+              <Text style={style.itemDetails}>
                 Use Dark/Night Theme to reduce eye strain
               </Text>
             </View>
@@ -55,18 +54,14 @@ export default props => {
         </TouchableOpacity>
 
         <TouchableOpacity>
-          <View
-            style={[
-              style.itemContainer,
-              {borderBottomColor: theme.borderColor},
-            ]}>
-            <MaterialIcons style={style.itemIcon} name="language" size={24} />
+          <View style={style.itemContainer}>
+            <MaterialIcons style={style.itemIcon} name="language" size={24} color={theme.contrast}/>
 
             <View style={style.itemText}>
-              <Text style={[style.itemTitle, {color: theme.text.title}]}>
+              <Text style={style.itemTitle}>
                 Language
               </Text>
-              <Text style={[style.itemDetails, {color: theme.text.subtitle}]}>
+              <Text style={style.itemDetails}>
                 Change the language of this application.
               </Text>
             </View>
@@ -78,21 +73,18 @@ export default props => {
             <View style={style.actionButtons}>
               <MaterialIcons name="share" size={32} color={theme.contrast} />
               <Text
-                style={[style.actionButtonsText, {color: theme.text.title}]}>
+                style={style.actionButtonsText}>
                 Share
               </Text>
             </View>
           </TouchableOpacity>
           <View
-            style={[
-              style.actionBorder,
-              {borderRightColor: theme.borderColor},
-            ]}></View>
+            style={style.actionBorder}></View>
           <TouchableOpacity>
             <View style={style.actionButtons}>
               <MaterialIcons name="star" size={32} color={theme.contrast} />
               <Text
-                style={[style.actionButtonsText, {color: theme.text.title}]}>
+                style={style.actionButtonsText}>
                 Rate
               </Text>
             </View>
@@ -102,7 +94,7 @@ export default props => {
 
       <View style={style.copyrightInfo}>
         <MaterialIcons name="copyright" size={48} color={theme.text.subtitle} />
-        <Text style={[style.copyrightInfoText, {color: theme.text.subtitle}]}>
+        <Text style={style.copyrightInfoText}>
           of Yoncity {date}
         </Text>
       </View>
